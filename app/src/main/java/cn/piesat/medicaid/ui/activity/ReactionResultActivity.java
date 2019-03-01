@@ -25,21 +25,24 @@ public class ReactionResultActivity extends AppCompatActivity {
     /**
      * 主反应物
      */
-    private String mainReactantIDs="A2002";
+    private String mainReactantIDs = "A2002";
     /**
      * 其他反应物
      */
-    private String otherReactantIDs="100003";
+    private String otherReactantIDs = "100003";
     /**
      * 反应条件
      */
-    private String reactionConditionIDs="";
+    private String reactionConditionIDs = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaction_result);
 
+        /**
+         * 搜索反应结果
+         */
         Controller.GetReactionResult(callback, mainReactantIDs, otherReactantIDs, reactionConditionIDs);
     }
 

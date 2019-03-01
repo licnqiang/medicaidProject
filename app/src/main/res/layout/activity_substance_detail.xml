@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.SubstanceDetailActivity">
+
+    <include layout="@layout/common_title" />
+
+    <cn.piesat.medicaid.ui.view.CommonItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:show_bottomline="false"
+        app:show_leftimg="@drawable/item_check_rrow"
+        app:show_text="基本信息"></cn.piesat.medicaid.ui.view.CommonItem>
+
+    <cn.piesat.medicaid.ui.view.CommonItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:show_bottomline="false"
+        app:show_leftimg="@drawable/item_check_rrow"
+        app:show_text="危险特性"></cn.piesat.medicaid.ui.view.CommonItem>
+
+    <cn.piesat.medicaid.ui.view.CommonItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:show_bottomline="false"
+        app:show_leftimg="@drawable/item_check_rrow"
+        app:show_text="化学反应"></cn.piesat.medicaid.ui.view.CommonItem>
+
+</LinearLayout>

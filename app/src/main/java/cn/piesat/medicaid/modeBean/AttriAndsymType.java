@@ -1,9 +1,8 @@
 package cn.piesat.medicaid.modeBean;
 
 import java.util.List;
-
 import cn.piesat.medicaid.tabmode.Attrs;
-import cn.piesat.medicaid.tabmode.AttrsType;
+
 
 /**
  * @author lq

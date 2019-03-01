@@ -28,7 +28,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
     /**
      * 设置一页搜索的最大条目数
      */
-    private int PAGE_SHOW_MAX_NUM = 20;
+    private int PAGE_SHOW_MAX_NUM = 50;
     /**
      * 当前搜索页数
      */
@@ -111,6 +111,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
     @Override
     public void onItemClick(View view, int position) {
         ToastUtils.showShort(SearchActivity.this, substanceInfos.get(position).substanceName);
+        toActivity(SubstanceDetailActivity.class);
     }
 
     /**
@@ -123,6 +124,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         if (isInitPage) {
             page = 0;
             searchKey = strKey;
+            adapter.setSearchKey(searchKey);
         }
         Controller.GetSubstanceInfoSearch(searchCallback, searchKey, page, PAGE_SHOW_MAX_NUM);
 

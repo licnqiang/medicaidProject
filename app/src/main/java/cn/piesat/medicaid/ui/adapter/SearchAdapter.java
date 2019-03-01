@@ -2,6 +2,7 @@ package cn.piesat.medicaid.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
+import cn.piesat.medicaid.util.ShowUtil;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
+    private String searchKey;
     Context context;
     List<SubstanceInfo> mInfolist;
     private LayoutInflater mInflater;
@@ -48,10 +51,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
     public SearchAdapter(Context context1, List<SubstanceInfo> data) {
         this.mInflater = LayoutInflater.from(context1);
-        context = context1;
-        mInfolist = data;
+        this.context = context1;
+        this.mInfolist = data;
 
     }
 
@@ -63,7 +70,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         SubstanceInfo mInfo = mInfolist.get(position);
-        holder.itemName.setText(mInfo.substanceName);
+        holder.itemName.setText(ShowUtil.matcherSearchTitle(R.color.them_color, mInfo.substanceName, searchKey));
     }
 
     @Override

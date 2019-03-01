@@ -125,10 +125,10 @@ public class Controller {
     }
 
     /**
-     * 查询属性/症状分类 2级分类
+     * 查询未知物质列表
      *
      * @param listener
-     * @param ids      属性id集合
+     * @param ids      通过属性id查物质列表
      */
     public static void GetSubstanceIdByAttrsId(final GetResultListenerCallback listener, final List<String> ids) {
         SubstanceIdByAttrsIdParser mParser = new SubstanceIdByAttrsIdParser(listener, ids);

@@ -27,7 +27,7 @@ import cn.piesat.medicaid.util.DataUtil;
  * @author lq
  * @fileName UserInfoParser
  * @data on  2019/2/22 17:17
- * @describe 通过属性id查物质ic
+ * @describe 通过属性id查物质列表
  */
 public class SubstanceIdByAttrsIdParser extends BaseParser {
     /*属性id集合*/
