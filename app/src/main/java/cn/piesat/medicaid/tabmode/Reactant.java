@@ -26,7 +26,7 @@ public class Reactant extends BaseModel implements Serializable {
      * 反应物ID
      */
     @Column
-    public long reactantID;
+    public String reactantID;
 
     /**
      * 反应物名称

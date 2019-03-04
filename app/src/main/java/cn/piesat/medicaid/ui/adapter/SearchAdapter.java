@@ -1,11 +1,14 @@
 package cn.piesat.medicaid.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
+import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
 import cn.piesat.medicaid.util.ShowUtil;
 
@@ -23,6 +27,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     List<SubstanceInfo> mInfolist;
     private LayoutInflater mInflater;
     private OnItemClickListener onItemClickListener;
+    private OnItemCheckClickListener onItemCheckClickListener;
+
+
+    public void setOnItemCheckClickListener(OnItemCheckClickListener onItemClickListener) {
+        this.onItemCheckClickListener = onItemClickListener;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -71,6 +81,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, final int position) {
         SubstanceInfo mInfo = mInfolist.get(position);
         holder.itemName.setText(ShowUtil.matcherSearchTitle(R.color.them_color, mInfo.substanceName, searchKey));
+        if (position % 2 == 0) {
+            holder.itemBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
+        } else {
+            holder.itemBackgroud.setBackgroundResource(R.color.white);
+
+        }
     }
 
     @Override
@@ -83,14 +99,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return mInfolist.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
         @BindView(R.id.item_name)
         TextView itemName;
+        @BindView(R.id.checkbox)
+        CheckBox checkbox;
+        @BindView(R.id.item_backgroud)
+        LinearLayout itemBackgroud;
 
         public ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
             ButterKnife.bind(this, view);
+            checkbox.setOnCheckedChangeListener(this);
         }
 
         @Override
@@ -98,6 +119,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             if (null != onItemClickListener) {
                 onItemClickListener.onItemClick(view, getLayoutPosition());
             }
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (null != onItemCheckClickListener) {
+                onItemCheckClickListener.onItemClick(checkbox, getLayoutPosition(), isChecked);
+            }
+
         }
     }
 }

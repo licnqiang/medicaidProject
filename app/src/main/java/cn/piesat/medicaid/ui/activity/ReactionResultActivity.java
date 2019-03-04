@@ -1,19 +1,18 @@
 package cn.piesat.medicaid.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.piesat.medicaid.R;
-import cn.piesat.medicaid.controller.Controller;
+import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
-import cn.piesat.medicaid.tabmode.ReactionCondition;
-import cn.piesat.medicaid.util.ToastUtils;
 
 /**
  * @author lq
@@ -21,42 +20,66 @@ import cn.piesat.medicaid.util.ToastUtils;
  * @data on  2019/2/28 14:20
  * @describe 反应结果
  */
-public class ReactionResultActivity extends AppCompatActivity {
-    /**
-     * 主反应物
-     */
-    private String mainReactantIDs = "A2002";
-    /**
-     * 其他反应物
-     */
-    private String otherReactantIDs = "100003";
-    /**
-     * 反应条件
-     */
-    private String reactionConditionIDs = "";
+public class ReactionResultActivity extends BaseActivity {
+
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.look_state)
+    ImageView lookState;
+    @BindView(R.id.item_title)
+    TextView itemTitle;
+    @BindView(R.id.item_ll_backgroud)
+    LinearLayout itemLlBackgroud;
+    @BindView(R.id.detail_info)
+    TextView detailInfo;
+    @BindView(R.id.item_detail)
+    LinearLayout itemDetail;
+    @BindView(R.id.look_state_1)
+    ImageView lookState_1;
+    @BindView(R.id.item_title_1)
+    TextView itemTitle_1;
+    @BindView(R.id.item_ll_backgroud_1)
+    LinearLayout itemLlBackgroud_1;
+    @BindView(R.id.detail_info_1)
+    TextView detailInfo_1;
+    @BindView(R.id.item_detail_1)
+    LinearLayout itemDetail_1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reaction_result);
-
-        /**
-         * 搜索反应结果
-         */
-        Controller.GetReactionResult(callback, mainReactantIDs, otherReactantIDs, reactionConditionIDs);
+    protected int getLayoutId() {
+        return R.layout.activity_reaction_result;
     }
 
+    @Override
+    protected void initView() {
+        itemTitle.setTextColor(Color.WHITE);
+        itemDetail.setVisibility(View.VISIBLE);
+        lookState.setSelected(true);
+        itemLlBackgroud.setBackgroundResource(R.color.them_color);
 
-    Controller.GetResultListenerCallback callback = new Controller.GetResultListenerCallback() {
-        @Override
-        public void onFinished(Object o) {
-            ChemicalReaction chemicalReaction = (ChemicalReaction) o;
-            Log.e("-----------", "---reactionConditions-----" + new Gson().toJson(chemicalReaction));
-        }
+        itemTitle_1.setTextColor(Color.WHITE);
+        itemDetail_1.setVisibility(View.VISIBLE);
+        lookState_1.setSelected(true);
+        itemLlBackgroud_1.setBackgroundResource(R.color.them_color);
+    }
 
-        @Override
-        public void onErro(Object o) {
-            ToastUtils.showShort(ReactionResultActivity.this, "查询出错,请尝试!");
+    @Override
+    protected void initData() {
+        getIntentData();
+    }
+
+    private void getIntentData() {
+        ChemicalReaction chemicalReaction = (ChemicalReaction) getIntent().getSerializableExtra("detail");
+        if (null != chemicalReaction) {
+            itemTitle.setText("反应结果");
+            detailInfo.setText(chemicalReaction.reactionResult);
+            itemTitle_1.setText("反应生成物");
+            detailInfo_1.setText(chemicalReaction.reactionProduct);
         }
-    };
+    }
+
+    @OnClick(R.id.img_back)
+    public void onViewClicked() {
+        finish();
+    }
 }

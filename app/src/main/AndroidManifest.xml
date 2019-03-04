@@ -25,7 +25,8 @@
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.ReactionResultActivity" />
         <activity android:name=".ui.activity.UnknownActivity" />
-        <activity android:name=".ui.activity.SubstanceDetailActivity"></activity>
+        <activity android:name=".ui.activity.SubstanceDetailActivity" />
+        <activity android:name=".ui.activity.SelectReactionActivity"></activity>
     </application>
 
 </manifest>

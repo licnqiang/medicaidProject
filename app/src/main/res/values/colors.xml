@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#1FAC93</color>
+    <color name="colorPrimaryDark">#1FAC93</color>
+    <color name="colorAccent">#1FAC93</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="create_edit_text">#E8E9EA</color>
     <color name="them_color">#1FAC93</color>
+
+    <color name="them_color_F5F8FD">#F5F8FD</color>
+    <color name="them_black_font">#5B5B5B</color>
 </resources>
