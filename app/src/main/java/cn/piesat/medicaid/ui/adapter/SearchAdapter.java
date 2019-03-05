@@ -17,13 +17,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
+import cn.piesat.medicaid.ui.activity.SearchActivity;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
 import cn.piesat.medicaid.util.ShowUtil;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     private String searchKey;
-    Context context;
+    SearchActivity context;
     List<SubstanceInfo> mInfolist;
     private LayoutInflater mInflater;
     private OnItemClickListener onItemClickListener;
@@ -65,7 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         this.searchKey = searchKey;
     }
 
-    public SearchAdapter(Context context1, List<SubstanceInfo> data) {
+    public SearchAdapter(SearchActivity context1, List<SubstanceInfo> data) {
         this.mInflater = LayoutInflater.from(context1);
         this.context = context1;
         this.mInfolist = data;
@@ -85,7 +86,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             holder.itemBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
         } else {
             holder.itemBackgroud.setBackgroundResource(R.color.white);
-
+        }
+        if (null != context.selectSubstance && context.selectSubstance.contains(mInfo)) {
+            holder.checkbox.setChecked(true);
+        } else {
+            holder.checkbox.setChecked(false);
         }
     }
 
@@ -124,7 +129,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (null != onItemCheckClickListener) {
-                onItemCheckClickListener.onItemClick(checkbox, getLayoutPosition(), isChecked);
+                onItemCheckClickListener.onItemClick(buttonView, getLayoutPosition(), isChecked);
             }
 
         }

@@ -3,13 +3,17 @@ package cn.piesat.medicaid.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +23,7 @@ import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.controller.Controller;
+import cn.piesat.medicaid.modeBean.PkBean;
 import cn.piesat.medicaid.tabmode.ReactionCondition;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
 import cn.piesat.medicaid.ui.adapter.SearchAdapter;
@@ -57,7 +62,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
     /**
      * 已选择得物质
      */
-    private List<Integer> selectSubstance = new ArrayList<>();
+    public List<SubstanceInfo> selectSubstance = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -137,17 +142,20 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
     @Override
     public void onItemClick(View view, int position, boolean select) {
         if (select) {
-            if (!selectSubstance.contains(position)) {
+            if (!selectSubstance.contains(substanceInfos.get(position))) {
                 if (selectSubstance.size() > 1) {
                     selectSubstance.remove(0);
-                    selectSubstance.add(position);
+                    adapter.notifyDataSetChanged();
                 }
+                selectSubstance.add(substanceInfos.get(position));
             }
         } else {
-            if (selectSubstance.contains(position)) {
-                selectSubstance.remove(position);
+            if (selectSubstance.contains(substanceInfos.get(position))) {
+                selectSubstance.remove(substanceInfos.get(position));
+                adapter.notifyDataSetChanged();
             }
         }
+
     }
 
     /**
@@ -203,15 +211,63 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         }
     };
 
-    @OnClick({R.id.img_back, R.id.iv_right})
+    @OnClick({R.id.img_back, R.id.tv_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 finish();
                 break;
-            case R.id.iv_right:
+            //对比
+            case R.id.tv_right:
+                if (selectSubstance.size() == 2) {
+                    setData();
+                } else {
+                    ToastUtils.showShort(this, "请选择两项物质对比");
+                }
                 break;
         }
+    }
+
+    private void setData() {
+        List<PkBean> pkBeans = new ArrayList<>();
+        PkBean pkBean = new PkBean();
+        pkBean.itemName1="<b>中文名:</b>" + selectSubstance.get(0).substanceName;
+        pkBean.itemName2="<b>中文名:</b>" + selectSubstance.get(1).substanceName;
+
+        PkBean pkBean1 = new PkBean();
+        pkBean1.itemName1="<b>中文别名:</b>" + selectSubstance.get(0).chAlias;
+        pkBean1.itemName2="<b>中文别名:</b>" + selectSubstance.get(1).chAlias;
+
+        PkBean pkBean2 = new PkBean();
+        pkBean2.itemName1="<b>英文名:</b>" + selectSubstance.get(0).enAlias;
+        pkBean2.itemName2="<b>英文名:</b>" + selectSubstance.get(1).enAlias;
+
+
+        PkBean pkBean3 = new PkBean();
+        pkBean3.itemName1="<b>分子式:</b>" + selectSubstance.get(0).molecularFormula;
+        pkBean3.itemName2="<b>分子式:</b>" + selectSubstance.get(1).molecularFormula;
+
+        PkBean pkBean4 = new PkBean();
+        pkBean4.itemName1="<b>分子量:</b>" + selectSubstance.get(0).molecularWeight;
+        pkBean4.itemName2="<b>分子量:</b>" + selectSubstance.get(1).molecularWeight;
+
+        PkBean pkBean5 = new PkBean();
+        pkBean5.itemName1="<b>外观与性状:</b>" + selectSubstance.get(0).appearanceAndCharacter;
+        pkBean5.itemName2="<b>外观与性状:</b>" + selectSubstance.get(1).appearanceAndCharacter;
+
+        PkBean pkBean6 = new PkBean();
+        pkBean6.itemName1="<b>溶解性:</b>" + selectSubstance.get(0).solubility;
+        pkBean6.itemName2="<b>溶解性:</b>" + selectSubstance.get(1).solubility;
+
+        pkBeans.add(pkBean);
+        pkBeans.add(pkBean1);
+        pkBeans.add(pkBean2);
+        pkBeans.add(pkBean3);
+        pkBeans.add(pkBean4);
+        pkBeans.add(pkBean5);
+        pkBeans.add(pkBean6);
+
+        startActivity(new Intent(SearchActivity.this,PKActivity.class).putExtra("detail", (Serializable) pkBeans));
     }
 
 }

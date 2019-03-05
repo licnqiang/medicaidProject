@@ -29,11 +29,6 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
     Context context;
     List<SubstanceDetail> mInfolist;
     private LayoutInflater mInflater;
-    private OnItemClickListener onItemClickListener;
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
 
     public SubstanceDetailAdapter(Context context1, List<SubstanceDetail> data) {
         this.mInflater = LayoutInflater.from(context1);
@@ -101,7 +96,7 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
         return mInfolist.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.look_state)
         ImageView lookState;
         @BindView(R.id.item_title)
@@ -115,15 +110,8 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             ButterKnife.bind(this, view);
         }
 
-        @Override
-        public void onClick(View view) {
-            if (null != onItemClickListener) {
-                onItemClickListener.onItemClick(view, getLayoutPosition());
-            }
-        }
     }
 }
