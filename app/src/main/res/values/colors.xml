@@ -10,4 +10,6 @@
 
     <color name="them_color_F5F8FD">#F5F8FD</color>
     <color name="them_black_font">#5B5B5B</color>
+
+    <color name="gry_tip_font">#C4C4C4</color>
 </resources>

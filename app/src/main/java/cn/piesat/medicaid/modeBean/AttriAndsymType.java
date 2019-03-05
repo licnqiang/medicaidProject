@@ -1,6 +1,7 @@
 package cn.piesat.medicaid.modeBean;
 
 import java.util.List;
+
 import cn.piesat.medicaid.tabmode.Attrs;
 
 
@@ -11,6 +12,7 @@ import cn.piesat.medicaid.tabmode.Attrs;
  * @describe 属性症状搜索分类
  */
 public class AttriAndsymType {
+    public boolean isSelect;
     public String typeName;
     public List<Attrs> attrsList;
 }

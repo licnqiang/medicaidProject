@@ -20,6 +20,7 @@ import cn.piesat.medicaid.tabmode.Reactant;
 import cn.piesat.medicaid.ui.activity.SelectReactionActivity;
 import cn.piesat.medicaid.ui.adapter.ReactantAdapter;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
+import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
 
 /**
  * 添加一组物质
@@ -32,10 +33,10 @@ public class OneGroupFragment extends BaseFragment implements OnItemCheckClickLi
     PullLoadMoreRecyclerView searchRecycler;
     private ReactantAdapter reactantAdapter;
     private List<Reactant> reactants;
-    private SelectReactionActivity mActivity;
+    private OnSearchKeyChange onSearchKeyChange;
 
-    public OneGroupFragment(SelectReactionActivity mActivity) {
-        this.mActivity = mActivity;
+    public OneGroupFragment(OnSearchKeyChange onSearchKeyChange) {
+        this.onSearchKeyChange = onSearchKeyChange;
     }
 
     @Override
@@ -83,17 +84,8 @@ public class OneGroupFragment extends BaseFragment implements OnItemCheckClickLi
      */
     @Override
     public void onItemClick(View view, int position, boolean select) {
-        if (reactants != null) {
-            Reactant reactant = reactants.get(position);
-            if (select) {
-                if (!mActivity.otherReactantIDs.contains(reactant.reactantID)) {
-                    mActivity.otherReactantIDs.add(reactant.reactantID);
-                }
-            } else {
-                if (mActivity.otherReactantIDs.contains(reactant.reactantID)) {
-                    mActivity.otherReactantIDs.remove(reactant.reactantID);
-                }
-            }
+        if (null != onSearchKeyChange && null != reactants) {
+            onSearchKeyChange.OnSearchKeyChange(reactants.get(position), select);
         }
     }
 }

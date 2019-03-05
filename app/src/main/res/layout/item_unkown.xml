@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".ui.activity.SearchActivity">
+
+    <LinearLayout
+        android:id="@+id/item_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="条目"
+            android:textColor="@color/them_black_font"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/loadProgressBar"
+            style="@style/StyleProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/progress_bg"
+            android:max="100" />
+
+        <TextView
+            android:id="@+id/tv_ProgressBar"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:textColor="@color/gry_tip_font"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

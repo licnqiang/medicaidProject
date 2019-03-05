@@ -1,6 +1,5 @@
 package cn.piesat.medicaid.ui.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,36 +16,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
-import cn.piesat.medicaid.tabmode.SubstanceInfo;
+import cn.piesat.medicaid.tabmode.Attrs;
+import cn.piesat.medicaid.ui.activity.SearchUnkwonActivity;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
-import cn.piesat.medicaid.util.ShowUtil;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
-    private String searchKey;
-    Context context;
-    List<SubstanceInfo> mInfolist;
+/**
+ * 一级属性/症状列表
+ */
+public class TwoAttriAndTypeAdapter extends RecyclerView.Adapter<TwoAttriAndTypeAdapter.ViewHolder> {
+
+    SearchUnkwonActivity context;
+    List<Attrs> mInfolist;
     private LayoutInflater mInflater;
-    private OnItemClickListener onItemClickListener;
     private OnItemCheckClickListener onItemCheckClickListener;
-
 
     public void setOnItemCheckClickListener(OnItemCheckClickListener onItemClickListener) {
         this.onItemCheckClickListener = onItemClickListener;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    /**
-     * 增加数据
-     *
-     * @param mData
-     */
-    public void AllData(List<SubstanceInfo> mData) {
-        mInfolist.addAll(mData);
-        notifyDataSetChanged();
     }
 
     /**
@@ -53,7 +40,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
      *
      * @param mData
      */
-    public void refreshData(List<SubstanceInfo> mData) {
+    public void refreshData(List<Attrs> mData) {
         if (null != mInfolist) {
             mInfolist.clear();
         }
@@ -61,31 +48,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-    public void setSearchKey(String searchKey) {
-        this.searchKey = searchKey;
-    }
 
-    public SearchAdapter(Context context1, List<SubstanceInfo> data) {
+    public TwoAttriAndTypeAdapter(SearchUnkwonActivity context1, List<Attrs> data) {
         this.mInflater = LayoutInflater.from(context1);
         this.context = context1;
         this.mInfolist = data;
-
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater.inflate(R.layout.item_search_keyword, parent, false));
+        return new ViewHolder(mInflater.inflate(R.layout.item_reactant, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        SubstanceInfo mInfo = mInfolist.get(position);
-        holder.itemName.setText(ShowUtil.matcherSearchTitle(R.color.them_color, mInfo.substanceName, searchKey));
-        if (position % 2 == 0) {
-            holder.itemBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        Attrs attrs = mInfolist.get(position);
+        holder.itemName.setText(attrs.comment);
+        if (context.searchKeyWords.contains(attrs)) {
+            holder.checkbox.setChecked(true);
         } else {
-            holder.itemBackgroud.setBackgroundResource(R.color.white);
-
+            holder.checkbox.setChecked(false);
         }
     }
 
@@ -99,26 +81,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return mInfolist.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
         @BindView(R.id.item_name)
         TextView itemName;
         @BindView(R.id.checkbox)
         CheckBox checkbox;
-        @BindView(R.id.item_backgroud)
-        LinearLayout itemBackgroud;
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             ButterKnife.bind(this, view);
             checkbox.setOnCheckedChangeListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (null != onItemClickListener) {
-                onItemClickListener.onItemClick(view, getLayoutPosition());
-            }
         }
 
         @Override
@@ -126,7 +98,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             if (null != onItemCheckClickListener) {
                 onItemCheckClickListener.onItemClick(checkbox, getLayoutPosition(), isChecked);
             }
-
         }
     }
 }

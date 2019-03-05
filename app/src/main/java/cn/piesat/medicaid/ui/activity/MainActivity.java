@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
             case R.id.tv_search_unknown:
-                startActivity(new Intent(MainActivity.this, UnknownActivity.class));
+                startActivity(new Intent(MainActivity.this, SearchUnkwonActivity.class));
                 break;
             case R.id.tv_wounded_stream:
                 startActivity(new Intent(MainActivity.this, ReactionResultActivity.class));

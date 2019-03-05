@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".ui.activity.SearchActivity">
 
-    <LinearLayout
-        android:id="@+id/item_backgroud"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:text="条目" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/green_box_5dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="条目"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/del_key_word"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@mipmap/emb" />
+
+    </RelativeLayout>
+</RelativeLayout>

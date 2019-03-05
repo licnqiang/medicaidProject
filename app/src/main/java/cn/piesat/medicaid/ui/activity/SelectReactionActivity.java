@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.controller.Controller;
+import cn.piesat.medicaid.tabmode.Attrs;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
 import cn.piesat.medicaid.tabmode.Reactant;
 import cn.piesat.medicaid.tabmode.ReactionCondition;
@@ -34,6 +35,7 @@ import cn.piesat.medicaid.ui.fragment.OneGroupFragment;
 import cn.piesat.medicaid.ui.fragment.OneTypeFragment;
 import cn.piesat.medicaid.ui.view.IndicatorLineUtil;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
+import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
 import cn.piesat.medicaid.util.ToastUtils;
 
 /**
@@ -96,19 +98,38 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     }
 
     private void init() {
-        fragments.add(new OneTypeFragment(this));
-        fragments.add(new OneGroupFragment(this));
+        fragments.add(new OneTypeFragment(onSearchKeyChange));
+        fragments.add(new OneGroupFragment(onSearchKeyChange));
         tabLayout.setupWithViewPager(viewPager, false);
         pagerAdapter = new ReactionPagerAdapter(getSupportFragmentManager(), titles, fragments);
         viewPager.setAdapter(pagerAdapter);
-
-//        tabLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                IndicatorLineUtil.setIndicator(tabLayout, 40, 40);
-//            }
-//        });
     }
+
+    /**
+     * 回调数据处理选中得关键字
+     */
+    private OnSearchKeyChange onSearchKeyChange = new OnSearchKeyChange() {
+        @Override
+        public void OnSearchKeyChange(Object object, boolean isSelect) {
+            Log.e("-------","-----object1--"+new Gson().toJson(object));
+
+            Reactant reactant = (Reactant) object;
+            if (null == reactant) {
+                return;
+            }
+            if (isSelect) {
+                if (!otherReactantIDs.contains(reactant.reactantID)) {
+                    otherReactantIDs.add(reactant.reactantID);
+                }
+            } else {
+                if (otherReactantIDs.contains(reactant.reactantID)) {
+                    otherReactantIDs.remove(reactant.reactantID);
+                }
+            }
+        }
+    };
+
+
 
     @Override
     public void onItemClick(View view, int position, boolean select) {
