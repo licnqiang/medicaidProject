@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -40,6 +41,8 @@ public class AttrFragment extends BaseFragment implements OnItemClickListener, O
     RecyclerView oneKeyWordRecyclerview;
     @BindView(R.id.two_key_word_recyclerview)
     RecyclerView twoKeyWordRecyclerview;
+    @BindView(R.id.tv_attr_name)
+    TextView tvAttrName;
 
     private OneAttriAndTypeAdapter oneAttriAndTypeAdapter;
     private List<AttriAndsymType> attriAndsymTypes;
@@ -93,6 +96,7 @@ public class AttrFragment extends BaseFragment implements OnItemClickListener, O
         for (AttriAndsymType attriAndsymType : attriAndsymTypes) {
             attriAndsymType.isSelect = false;
         }
+        tvAttrName.setText(attriAndsymTypes.get(position).typeName+" :");
         attriAndsymTypes.get(position).isSelect = true;
         oneAttriAndTypeAdapter.notifyDataSetChanged();
         twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(position).attrsList);
@@ -126,6 +130,7 @@ public class AttrFragment extends BaseFragment implements OnItemClickListener, O
             List<AttriAndsymType> attriAndsymTypes = (List<AttriAndsymType>) o;
             if (attriAndsymTypes.size() > 0) {
                 attriAndsymTypes.get(0).isSelect = true;
+                tvAttrName.setText(attriAndsymTypes.get(0).typeName+" :");
                 twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(0).attrsList);
                 oneAttriAndTypeAdapter.refreshData(attriAndsymTypes);
             }

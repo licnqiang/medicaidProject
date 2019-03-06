@@ -45,7 +45,7 @@ public class OneTypeFragment extends BaseFragment implements OnItemCheckClickLis
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_one_type;
+        return R.layout.fragment_one_group;
     }
 
     @Override

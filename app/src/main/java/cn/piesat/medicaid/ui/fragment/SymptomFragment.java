@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,8 @@ public class SymptomFragment extends BaseFragment implements OnItemClickListener
     RecyclerView oneKeyWordRecyclerview;
     @BindView(R.id.two_key_word_recyclerview)
     RecyclerView twoKeyWordRecyclerview;
+    @BindView(R.id.tv_attr_name)
+    TextView tvAttrName;
 
     private OneAttriAndTypeAdapter oneAttriAndTypeAdapter;
     private List<AttriAndsymType> attriAndsymTypes;
@@ -55,7 +58,7 @@ public class SymptomFragment extends BaseFragment implements OnItemClickListener
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_type;
+        return R.layout.fragment_attr;
     }
 
     @Override
@@ -92,6 +95,7 @@ public class SymptomFragment extends BaseFragment implements OnItemClickListener
         for (AttriAndsymType attriAndsymType : attriAndsymTypes) {
             attriAndsymType.isSelect = false;
         }
+        tvAttrName.setText(attriAndsymTypes.get(position).typeName + " :");
         attriAndsymTypes.get(position).isSelect = true;
         oneAttriAndTypeAdapter.notifyDataSetChanged();
         twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(position).attrsList);
@@ -124,6 +128,7 @@ public class SymptomFragment extends BaseFragment implements OnItemClickListener
             List<AttriAndsymType> attriAndsymTypes = (List<AttriAndsymType>) o;
             if (attriAndsymTypes.size() > 0) {
                 attriAndsymTypes.get(0).isSelect = true;
+                tvAttrName.setText(attriAndsymTypes.get(0).typeName + " :");
                 twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(0).attrsList);
                 oneAttriAndTypeAdapter.refreshData(attriAndsymTypes);
             }

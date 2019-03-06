@@ -1,6 +1,7 @@
 package cn.piesat.medicaid.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,16 +33,15 @@ public class ReactantAdapter extends RecyclerView.Adapter<ReactantAdapter.ViewHo
 
     Context context;
     List<Reactant> mInfolist;
-    List<Reactant> originalInfolist= new ArrayList<Reactant>();
+    List<Reactant> originalInfolist = new ArrayList<Reactant>();
     private MyFilter myFilter;
     private LayoutInflater mInflater;
     private OnItemCheckClickListener onItemCheckClickListener;
-    private String keyWord="";
+    private String keyWord = "";
 
     public void setOnItemCheckClickListener(OnItemCheckClickListener onItemClickListener) {
         this.onItemCheckClickListener = onItemClickListener;
     }
-
 
 
     /**
@@ -75,7 +75,7 @@ public class ReactantAdapter extends RecyclerView.Adapter<ReactantAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Reactant Reactant = mInfolist.get(position);
-        holder.itemName.setText(ShowUtil.matcherSearchTitle(R.color.them_color, Reactant.reactantName, keyWord));
+        holder.itemName.setText(ShowUtil.matcherSearchTitle(Color.parseColor("#1FAC93"), Reactant.reactantName, keyWord));
 
     }
 
@@ -144,7 +144,7 @@ public class ReactantAdapter extends RecyclerView.Adapter<ReactantAdapter.ViewHo
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             if (null != results) {
-                keyWord=constraint.toString();
+                keyWord = constraint.toString();
                 mInfolist.clear();
                 mInfolist.addAll((List<Reactant>) results.values);
                 // 刷新数据源显示

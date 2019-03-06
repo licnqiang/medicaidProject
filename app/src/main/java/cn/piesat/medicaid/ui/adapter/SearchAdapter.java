@@ -2,6 +2,7 @@ package cn.piesat.medicaid.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         SubstanceInfo mInfo = mInfolist.get(position);
-        holder.itemName.setText(ShowUtil.matcherSearchTitle(R.color.them_color, mInfo.substanceName, searchKey));
+        holder.itemName.setText(ShowUtil.matcherSearchTitle(Color.parseColor("#1FAC93"), mInfo.substanceName, searchKey));
         if (position % 2 == 0) {
             holder.itemBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
         } else {
