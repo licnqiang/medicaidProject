@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".ui.activity.SearchActivity">
 
     <RelativeLayout
@@ -19,21 +20,25 @@
         <TextView
             android:id="@+id/tv_left"
             android:layout_width="100dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
             android:layout_toLeftOf="@+id/center"
+            android:background="@drawable/gry_box_10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/center"
+            android:background="@drawable/gry_box_10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/center"
             android:text="TextView" />
 
     </RelativeLayout>

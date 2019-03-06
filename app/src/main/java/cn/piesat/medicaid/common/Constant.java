@@ -7,7 +7,15 @@ package cn.piesat.medicaid.common;
  * @describe TODO
  */
 public class Constant {
-    public  interface sysConfig {
-        int pageNum = 10;
+    public interface sysConfig {
+        String TAKE_DATA_KEY = "detail";
+        //属性
+        String TYPE_ATTRS = "1";
+        //症状
+        String TYPE_SYMPTOM = "2";
+        //属性
+        String TYPE_ONE_TYPE = "1";
+        //症状
+        String TYPE_ONE_GROUP = "2";
     }
 }

@@ -24,7 +24,6 @@
         </activity>
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.ReactionResultActivity" />
-        <activity android:name=".ui.activity.UnknownActivity" />
         <activity android:name=".ui.activity.SubstanceDetailActivity" />
         <activity android:name=".ui.activity.SelectReactionActivity" />
         <activity android:name=".ui.activity.SearchUnkwonActivity" />

@@ -15,18 +15,20 @@ import java.util.List;
 import butterknife.BindView;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseFragment;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
 import cn.piesat.medicaid.tabmode.Reactant;
 import cn.piesat.medicaid.ui.activity.SelectReactionActivity;
 import cn.piesat.medicaid.ui.adapter.ReactantAdapter;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
+import cn.piesat.medicaid.util.ToastUtils;
 
 /**
  * 添加一组物质
  */
 @SuppressLint("ValidFragment")
-public class OneGroupFragment extends BaseFragment implements OnItemCheckClickListener {
+public class OneGroupFragment extends BaseFragment implements OnItemCheckClickListener, SearchView.OnQueryTextListener {
     @BindView(R.id.view_search)
     SearchView viewSearch;
     @BindView(R.id.search_recycler)
@@ -47,7 +49,8 @@ public class OneGroupFragment extends BaseFragment implements OnItemCheckClickLi
     @Override
     protected void initView() {
         setAdapter();
-        Controller.GetReactionList(callback, "2");
+        viewSearch.setOnQueryTextListener(this);
+        Controller.GetReactionList(callback, Constant.sysConfig.TYPE_ONE_GROUP);
     }
 
     private void setAdapter() {
@@ -65,16 +68,36 @@ public class OneGroupFragment extends BaseFragment implements OnItemCheckClickLi
 
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if (reactantAdapter != null) {
+            reactantAdapter.getFilter().filter(query);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (reactantAdapter != null) {
+            reactantAdapter.getFilter().filter(newText);
+        }
+        return false;
+    }
+
+
     Controller.GetResultListenerCallback callback = new Controller.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            if(null==o){
+                return;
+            }
             List<Reactant> reactantList = (List<Reactant>) o;
             reactantAdapter.refreshData(reactantList);
         }
 
         @Override
         public void onErro(Object o) {
-
+            ToastUtils.showShort(getActivity(), "查询出错,请尝试重新刷新");
         }
     };
 

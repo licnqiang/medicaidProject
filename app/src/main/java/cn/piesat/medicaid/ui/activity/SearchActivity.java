@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
 import cn.piesat.medicaid.modeBean.PkBean;
 import cn.piesat.medicaid.tabmode.ReactionCondition;
@@ -132,8 +133,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
      */
     @Override
     public void onItemClick(View view, int position) {
-        ToastUtils.showShort(SearchActivity.this, substanceInfos.get(position).substanceName);
-        startActivity(new Intent(SearchActivity.this, SubstanceDetailActivity.class).putExtra("detail", substanceInfos.get(position)));
+        startActivity(new Intent(SearchActivity.this, SubstanceDetailActivity.class).putExtra(Constant.sysConfig.TAKE_DATA_KEY, substanceInfos.get(position)));
     }
 
     /**
@@ -217,7 +217,9 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
             case R.id.img_back:
                 finish();
                 break;
-            //对比
+            /**
+             * 对比
+             */
             case R.id.tv_right:
                 if (selectSubstance.size() == 2) {
                     setData();
@@ -228,36 +230,55 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         }
     }
 
+    /**
+     * 整合数据
+     */
     private void setData() {
         List<PkBean> pkBeans = new ArrayList<>();
         PkBean pkBean = new PkBean();
-        pkBean.itemName1="<b>中文名:</b>" + selectSubstance.get(0).substanceName;
-        pkBean.itemName2="<b>中文名:</b>" + selectSubstance.get(1).substanceName;
+        pkBean.itemName1 = "<b>中文名:</b> " + selectSubstance.get(0).substanceName + "<br/>" +
+                "<b>中文别名:</b> " + selectSubstance.get(0).chAlias + "<br/>" +
+                "<b>英文名:</b> " + selectSubstance.get(0).enAlias + "<br/>" +
+                "<b>分子式:</b> " + selectSubstance.get(0).molecularFormula + "<br/>" +
+                "<b>分子量:</b> " + selectSubstance.get(0).molecularWeight + "<br/>" +
+                "<b>外观与性状:</b> " + selectSubstance.get(0).appearanceAndCharacter + "<br/>" +
+                "<b>溶解性:</b> " + selectSubstance.get(0).solubility + "<br/>" +
+                "<b>稳定性:</b> " + selectSubstance.get(0).stability + "<br/>";
+        ;
+        pkBean.itemName2 = "<b>中文名:</b> " + selectSubstance.get(1).substanceName + "<br/>" +
+                "<b>中文别名:</b> " + selectSubstance.get(1).chAlias + "<br/>" +
+                "<b>英文名:</b> " + selectSubstance.get(1).enAlias + "<br/>" +
+                "<b>分子式:</b> " + selectSubstance.get(1).molecularFormula + "<br/>" +
+                "<b>分子量:</b> " + selectSubstance.get(1).molecularWeight + "<br/>" +
+                "<b>外观与性状:</b> " + selectSubstance.get(1).appearanceAndCharacter + "<br/>" +
+                "<b>溶解性:</b> " + selectSubstance.get(1).solubility + "<br/>" +
+                "<b>稳定性:</b> " + selectSubstance.get(1).stability + "<br/>";
+        ;
 
         PkBean pkBean1 = new PkBean();
-        pkBean1.itemName1="<b>中文别名:</b>" + selectSubstance.get(0).chAlias;
-        pkBean1.itemName2="<b>中文别名:</b>" + selectSubstance.get(1).chAlias;
+        pkBean1.itemName1 = "<b>外观与性状:</b>" + selectSubstance.get(0).appearanceAndCharacter;
+        pkBean1.itemName2 = "<b>外观与性状:</b>" + selectSubstance.get(1).appearanceAndCharacter;
 
         PkBean pkBean2 = new PkBean();
-        pkBean2.itemName1="<b>英文名:</b>" + selectSubstance.get(0).enAlias;
-        pkBean2.itemName2="<b>英文名:</b>" + selectSubstance.get(1).enAlias;
+        pkBean2.itemName1 = "<b>危害特性:</b>" + selectSubstance.get(0).hazardProperty;
+        pkBean2.itemName2 = "<b>危害特性:</b>" + selectSubstance.get(1).hazardProperty;
 
 
         PkBean pkBean3 = new PkBean();
-        pkBean3.itemName1="<b>分子式:</b>" + selectSubstance.get(0).molecularFormula;
-        pkBean3.itemName2="<b>分子式:</b>" + selectSubstance.get(1).molecularFormula;
+        pkBean3.itemName1 = "<b>毒理学信息:</b>" + selectSubstance.get(0).toxicologyInfo;
+        pkBean3.itemName2 = "<b>毒理学信息:</b>" + selectSubstance.get(1).toxicologyInfo;
 
         PkBean pkBean4 = new PkBean();
-        pkBean4.itemName1="<b>分子量:</b>" + selectSubstance.get(0).molecularWeight;
-        pkBean4.itemName2="<b>分子量:</b>" + selectSubstance.get(1).molecularWeight;
+        pkBean4.itemName1 = "<b>临床表现:</b>" + selectSubstance.get(0).clinicalManifestation;
+        pkBean4.itemName2 = "<b>临床表现:</b>" + selectSubstance.get(1).clinicalManifestation;
 
         PkBean pkBean5 = new PkBean();
-        pkBean5.itemName1="<b>外观与性状:</b>" + selectSubstance.get(0).appearanceAndCharacter;
-        pkBean5.itemName2="<b>外观与性状:</b>" + selectSubstance.get(1).appearanceAndCharacter;
+        pkBean5.itemName1 = "<b>保护措施:</b>" + selectSubstance.get(0).protectiveAction;
+        pkBean5.itemName2 = "<b>保护措施:</b>" + selectSubstance.get(1).protectiveAction;
 
         PkBean pkBean6 = new PkBean();
-        pkBean6.itemName1="<b>溶解性:</b>" + selectSubstance.get(0).solubility;
-        pkBean6.itemName2="<b>溶解性:</b>" + selectSubstance.get(1).solubility;
+        pkBean6.itemName1 = "<b>急救措施:</b>" + selectSubstance.get(0).emergencyTreatment;
+        pkBean6.itemName2 = "<b>急救措施:</b>" + selectSubstance.get(1).emergencyTreatment;
 
         pkBeans.add(pkBean);
         pkBeans.add(pkBean1);
@@ -267,7 +288,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         pkBeans.add(pkBean5);
         pkBeans.add(pkBean6);
 
-        startActivity(new Intent(SearchActivity.this,PKActivity.class).putExtra("detail", (Serializable) pkBeans));
+        startActivity(new Intent(SearchActivity.this, PKActivity.class).putExtra(Constant.sysConfig.TAKE_DATA_KEY, (Serializable) pkBeans));
     }
 
 }

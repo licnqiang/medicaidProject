@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.modeBean.SubstanceDetail;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
 import cn.piesat.medicaid.ui.adapter.SubstanceDetailAdapter;
@@ -73,7 +74,7 @@ public class SubstanceDetailActivity extends BaseActivity {
     }
 
     public void getIntentData() {
-        SubstanceInfo substanceInfo = (SubstanceInfo) getIntent().getSerializableExtra("detail");
+        SubstanceInfo substanceInfo = (SubstanceInfo) getIntent().getSerializableExtra(Constant.sysConfig.TAKE_DATA_KEY);
         String baseInfo = "<b>中文名:</b> " + substanceInfo.substanceName + "<br/>" +
                 "<b>中文别名:</b> " + substanceInfo.chAlias + "<br/>" +
                 "<b>英文名:</b> " + substanceInfo.enAlias + "<br/>" +

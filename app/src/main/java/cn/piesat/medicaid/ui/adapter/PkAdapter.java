@@ -60,7 +60,6 @@ public class PkAdapter extends RecyclerView.Adapter<PkAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         PkBean pkBean = mInfolist.get(position);
-        Log.e("----------","----pkBean------"+new Gson().toJson(pkBean));
         holder.tvLeft.setText(Html.fromHtml(pkBean.itemName1));
         holder.tvRight.setText(Html.fromHtml(pkBean.itemName2));
 

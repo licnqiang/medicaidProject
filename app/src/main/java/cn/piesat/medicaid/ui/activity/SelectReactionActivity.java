@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -84,6 +85,7 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
         init();
     }
 
+
     @Override
     protected void initData() {
         setReactantState();
@@ -111,8 +113,6 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     private OnSearchKeyChange onSearchKeyChange = new OnSearchKeyChange() {
         @Override
         public void OnSearchKeyChange(Object object, boolean isSelect) {
-            Log.e("-------","-----object1--"+new Gson().toJson(object));
-
             Reactant reactant = (Reactant) object;
             if (null == reactant) {
                 return;
@@ -128,8 +128,6 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
             }
         }
     };
-
-
 
     @Override
     public void onItemClick(View view, int position, boolean select) {
@@ -200,13 +198,16 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     Controller.GetResultListenerCallback callback = new Controller.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            if (null == o) {
+                return;
+            }
             List<ReactionCondition> reactionConditionList = (List<ReactionCondition>) o;
             reactionConditionAdapter.refreshData(reactionConditionList);
         }
 
         @Override
         public void onErro(Object o) {
-
+            ToastUtils.showShort(SelectReactionActivity.this, "查询出错");
         }
     };
 
@@ -216,11 +217,14 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     Controller.GetResultListenerCallback resultCallback = new Controller.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            if (null == o) {
+                return;
+            }
             ChemicalReaction chemicalReaction = (ChemicalReaction) o;
             if (null == chemicalReaction) {
                 ToastUtils.showShort(SelectReactionActivity.this, "暂无该反应结果");
-            }else {
-                startActivity(new Intent(SelectReactionActivity.this,ReactionResultActivity.class).putExtra("detail",chemicalReaction));
+            } else {
+                startActivity(new Intent(SelectReactionActivity.this, ReactionResultActivity.class).putExtra("detail", chemicalReaction));
             }
         }
 

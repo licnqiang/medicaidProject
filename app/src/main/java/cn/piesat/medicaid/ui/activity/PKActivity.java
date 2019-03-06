@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.modeBean.PkBean;
 import cn.piesat.medicaid.ui.adapter.PkAdapter;
 
@@ -53,8 +54,7 @@ public class PKActivity extends BaseActivity {
     }
 
     public void getIntentData() {
-        pkBeans.addAll((List<PkBean>) getIntent().getSerializableExtra("detail"));
-        Log.e("----------","----pkBeans------"+new Gson().toJson(pkBeans));
+        pkBeans.addAll((List<PkBean>) getIntent().getSerializableExtra(Constant.sysConfig.TAKE_DATA_KEY));
         pkAdapter.notifyDataSetChanged();
     }
 }

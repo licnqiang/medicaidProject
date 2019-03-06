@@ -1,24 +1,19 @@
 package cn.piesat.medicaid.ui.activity;
 
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
@@ -29,9 +24,10 @@ import cn.piesat.medicaid.ui.adapter.ReactionPagerAdapter;
 import cn.piesat.medicaid.ui.adapter.SearchKeyWordAdapter;
 import cn.piesat.medicaid.ui.adapter.SearchUnkwonAdapter;
 import cn.piesat.medicaid.ui.fragment.AttrFragment;
-import cn.piesat.medicaid.ui.fragment.TypeFragment;
+import cn.piesat.medicaid.ui.fragment.SymptomFragment;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
 import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
+import cn.piesat.medicaid.util.ToastUtils;
 
 public class SearchUnkwonActivity extends BaseActivity implements OnItemClickListener {
     @BindView(R.id.tv_title)
@@ -52,7 +48,7 @@ public class SearchUnkwonActivity extends BaseActivity implements OnItemClickLis
 
     public List<Attrs> searchKeyWords = new ArrayList<>();
     public AttrFragment attrFragment;
-    public TypeFragment typeFragment;
+    public SymptomFragment typeFragment;
     private SearchUnkwonAdapter searchUnkwonAdapter;
     private List<SubstanceScale> substanceScales;
 
@@ -70,7 +66,7 @@ public class SearchUnkwonActivity extends BaseActivity implements OnItemClickLis
     }
 
     private void initSearchResultAdapter() {
-        substanceScales=new ArrayList<>();
+        substanceScales = new ArrayList<>();
         searchUnkwonAdapter = new SearchUnkwonAdapter(this, substanceScales);
         searchResult.setLayoutManager(new LinearLayoutManager(this));
         searchResult.setAdapter(searchUnkwonAdapter);
@@ -94,7 +90,7 @@ public class SearchUnkwonActivity extends BaseActivity implements OnItemClickLis
 
     private void init() {
         attrFragment = new AttrFragment(onSearchKeyChange, this);
-        typeFragment = new TypeFragment(onSearchKeyChange, this);
+        typeFragment = new SymptomFragment(onSearchKeyChange, this);
         fragments.add(attrFragment);
         fragments.add(typeFragment);
         tablayout.setupWithViewPager(viewpager, false);
@@ -192,9 +188,13 @@ public class SearchUnkwonActivity extends BaseActivity implements OnItemClickLis
     Controller.GetResultListenerCallback resultCallback = new Controller.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
-            List<SubstanceScale> substanceScales=(List<SubstanceScale>)o;
+
+            if (null == o) {
+                return;
+            }
+            List<SubstanceScale> substanceScales = (List<SubstanceScale>) o;
             Collections.sort(substanceScales);//编译通过；
-            if(null!=searchUnkwonAdapter){
+            if (null != searchUnkwonAdapter) {
                 searchUnkwonAdapter.refreshData(substanceScales);
             }
 
@@ -202,7 +202,7 @@ public class SearchUnkwonActivity extends BaseActivity implements OnItemClickLis
 
         @Override
         public void onErro(Object o) {
-
+            ToastUtils.showShort(SearchUnkwonActivity.this, "搜索出错,请尝试重新搜索");
         }
     };
 }

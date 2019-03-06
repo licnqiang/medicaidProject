@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseFragment;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
 import cn.piesat.medicaid.modeBean.AttriAndsymType;
 import cn.piesat.medicaid.tabmode.Attrs;
@@ -25,12 +26,13 @@ import cn.piesat.medicaid.ui.adapter.TwoAttriAndTypeAdapter;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
 import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
+import cn.piesat.medicaid.util.ToastUtils;
 
 /**
  * 症状
  */
 @SuppressLint("ValidFragment")
-public class TypeFragment extends BaseFragment implements OnItemClickListener, OnItemCheckClickListener {
+public class SymptomFragment extends BaseFragment implements OnItemClickListener, OnItemCheckClickListener {
 
     @BindView(R.id.one_key_word_recyclerview)
     RecyclerView oneKeyWordRecyclerview;
@@ -46,10 +48,11 @@ public class TypeFragment extends BaseFragment implements OnItemClickListener, O
     private OnSearchKeyChange onSearchKeyChange;
     private SearchUnkwonActivity mActivity;
 
-    public TypeFragment(OnSearchKeyChange onSearchKeyChange, SearchUnkwonActivity mActivity) {
+    public SymptomFragment(OnSearchKeyChange onSearchKeyChange, SearchUnkwonActivity mActivity) {
         this.onSearchKeyChange = onSearchKeyChange;
         this.mActivity = mActivity;
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_type;
@@ -79,7 +82,6 @@ public class TypeFragment extends BaseFragment implements OnItemClickListener, O
     }
 
 
-
     @Override
     protected void initData() {
 
@@ -107,7 +109,7 @@ public class TypeFragment extends BaseFragment implements OnItemClickListener, O
     @Override
     public void onResume() {
         super.onResume();
-        Controller.GetAttriAndSymptomType(callback, "2");
+        Controller.GetAttriAndSymptomType(callback, Constant.sysConfig.TYPE_SYMPTOM);
     }
 
     /**
@@ -116,15 +118,20 @@ public class TypeFragment extends BaseFragment implements OnItemClickListener, O
     Controller.GetResultListenerCallback callback = new Controller.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            if (null == o) {
+                return;
+            }
             List<AttriAndsymType> attriAndsymTypes = (List<AttriAndsymType>) o;
-            attriAndsymTypes.get(0).isSelect = true;
-            twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(0).attrsList);
-            oneAttriAndTypeAdapter.refreshData(attriAndsymTypes);
+            if (attriAndsymTypes.size() > 0) {
+                attriAndsymTypes.get(0).isSelect = true;
+                twoAttriAndTypeAdapter.refreshData(attriAndsymTypes.get(0).attrsList);
+                oneAttriAndTypeAdapter.refreshData(attriAndsymTypes);
+            }
         }
 
         @Override
         public void onErro(Object o) {
-
+            ToastUtils.showShort(getActivity(), "查询出错,请尝试重新刷新");
         }
     };
 }
