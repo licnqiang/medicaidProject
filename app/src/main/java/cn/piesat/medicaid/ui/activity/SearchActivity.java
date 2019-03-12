@@ -3,14 +3,10 @@ package cn.piesat.medicaid.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.io.Serializable;
@@ -25,7 +21,6 @@ import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
 import cn.piesat.medicaid.modeBean.PkBean;
-import cn.piesat.medicaid.tabmode.ReactionCondition;
 import cn.piesat.medicaid.tabmode.SubstanceInfo;
 import cn.piesat.medicaid.ui.adapter.SearchAdapter;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
@@ -41,6 +36,8 @@ import cn.piesat.medicaid.util.ToastUtils;
 public class SearchActivity extends BaseActivity implements SearchView.OnQueryTextListener, OnItemClickListener, OnItemCheckClickListener {
     @BindView(R.id.tv_right)
     TextView tvRight;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     /**
      * 设置一页搜索的最大条目数
      */
@@ -74,6 +71,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
     protected void initView() {
         tvRight.setVisibility(View.VISIBLE);
         tvRight.setText(R.string.substance_pk);
+        tvTitle.setText(R.string.search_substans_title);
         viewSearch.setOnQueryTextListener(this);
         initRecyclerView();
         initAdapter();
@@ -290,5 +288,4 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
 
         startActivity(new Intent(SearchActivity.this, PKActivity.class).putExtra(Constant.sysConfig.TAKE_DATA_KEY, (Serializable) pkBeans));
     }
-
 }

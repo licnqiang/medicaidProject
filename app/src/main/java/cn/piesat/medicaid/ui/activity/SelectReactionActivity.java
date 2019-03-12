@@ -6,14 +6,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +21,13 @@ import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.controller.Controller;
-import cn.piesat.medicaid.tabmode.Attrs;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
 import cn.piesat.medicaid.tabmode.Reactant;
 import cn.piesat.medicaid.tabmode.ReactionCondition;
-import cn.piesat.medicaid.tabmode.SubstanceInfo;
-import cn.piesat.medicaid.ui.adapter.ReactantAdapter;
 import cn.piesat.medicaid.ui.adapter.ReactionConditionAdapter;
 import cn.piesat.medicaid.ui.adapter.ReactionPagerAdapter;
 import cn.piesat.medicaid.ui.fragment.OneGroupFragment;
 import cn.piesat.medicaid.ui.fragment.OneTypeFragment;
-import cn.piesat.medicaid.ui.view.IndicatorLineUtil;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnSearchKeyChange;
 import cn.piesat.medicaid.util.ToastUtils;
@@ -42,19 +35,20 @@ import cn.piesat.medicaid.util.ToastUtils;
 /**
  * 模拟实验室检验
  */
-public class SelectReactionActivity extends BaseActivity implements OnItemCheckClickListener {
+public class SelectReactionActivity extends BaseActivity implements OnItemCheckClickListener, ViewPager.OnPageChangeListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tablayout)
-    TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.reactant_state)
     RecyclerView reactantState;
+    @BindView(R.id.one_type)
+    Button oneType;
+    @BindView(R.id.one_group)
+    Button oneGroup;
     private ReactionPagerAdapter pagerAdapter;
     private ArrayList<Fragment> fragments = new ArrayList<>();
-    private String[] titles = new String[]{"添加一种物质", "添加一组物质"};
     private ReactionConditionAdapter reactionConditionAdapter;
     private List<ReactionCondition> reactionConditions;
 
@@ -81,8 +75,11 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
 
     @Override
     protected void initView() {
+        tvTitle.setText("添加化学物质");
         getIntentData();
         init();
+        oneType.setSelected(true);
+        oneGroup.setSelected(false);
     }
 
 
@@ -102,8 +99,8 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     private void init() {
         fragments.add(new OneTypeFragment(onSearchKeyChange));
         fragments.add(new OneGroupFragment(onSearchKeyChange));
-        tabLayout.setupWithViewPager(viewPager, false);
-        pagerAdapter = new ReactionPagerAdapter(getSupportFragmentManager(), titles, fragments);
+        pagerAdapter = new ReactionPagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.setOnPageChangeListener(this);
         viewPager.setAdapter(pagerAdapter);
     }
 
@@ -145,7 +142,7 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
         }
     }
 
-    @OnClick({R.id.img_back, R.id.btn_reactant})
+    @OnClick({R.id.img_back, R.id.btn_reactant, R.id.one_type, R.id.one_group})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -185,6 +182,17 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
                 Controller.GetReactionResult(resultCallback, mainReactantIDs, stringBuffer.toString(), stringBufferCondition.toString());
                 break;
 
+            case R.id.one_type:
+                oneType.setSelected(true);
+                oneGroup.setSelected(false);
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.one_group:
+                oneType.setSelected(false);
+                oneGroup.setSelected(true);
+                viewPager.setCurrentItem(1);
+                break;
+
             default:
         }
     }
@@ -218,12 +226,11 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
         @Override
         public void onFinished(Object o) {
             if (null == o) {
+                ToastUtils.showShort(SelectReactionActivity.this, "暂无该反应结果");
                 return;
             }
             ChemicalReaction chemicalReaction = (ChemicalReaction) o;
-            if (null == chemicalReaction) {
-                ToastUtils.showShort(SelectReactionActivity.this, "暂无该反应结果");
-            } else {
+            if (null != chemicalReaction) {
                 startActivity(new Intent(SelectReactionActivity.this, ReactionResultActivity.class).putExtra("detail", chemicalReaction));
             }
         }
@@ -238,4 +245,27 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
         mainReactantIDs = getIntent().getStringExtra("substanceNum");
     }
 
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+        if (0 == position) {
+            oneType.setSelected(true);
+            oneGroup.setSelected(false);
+        } else {
+            oneType.setSelected(false);
+            oneGroup.setSelected(true);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }

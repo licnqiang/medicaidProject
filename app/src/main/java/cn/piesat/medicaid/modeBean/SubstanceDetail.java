@@ -11,4 +11,5 @@ public class SubstanceDetail {
     public String substanceNum;
     public String Content;
     public int drawableRe;
+    public boolean state;
 }

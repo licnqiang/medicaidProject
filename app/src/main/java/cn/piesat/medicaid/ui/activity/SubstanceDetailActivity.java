@@ -46,11 +46,11 @@ public class SubstanceDetailActivity extends BaseActivity {
 
     private void setData() {
         String[] title = {"基本信息", "危险特性", "健康危害", "毒理学信息", "临床表现", "防护措施", "急救措施", "危害评估", "化学反应"};
-//        int [] imgBg ={R.mipmap.menu_one,R.mipmap.menu_one,R.mipmap.menu_three,R.mipmap.menu_four,R.mipmap.menu_five,R.mipmap.menu_six,R.mipmap.menu_seven,R.mipmap.menu_eghit};
+        int[] drawable = {R.mipmap.base, R.mipmap.weixianyuan, R.mipmap.heathy, R.mipmap.xiaodushui, R.mipmap.linchangzhengduan, R.mipmap.fanghu, R.mipmap.jijiu, R.mipmap.pinggu, R.mipmap.huaxue};
         for (int i = 0; i < 9; i++) {
             SubstanceDetail substanceDetail = new SubstanceDetail();
             substanceDetail.titleName = title[i];
-//            substanceDetail.drawableRe=imgBg[i];
+            substanceDetail.drawableRe=drawable[i];
             substanceDetails.add(substanceDetail);
         }
         substanceDetailAdapter.notifyDataSetChanged();
@@ -75,6 +75,8 @@ public class SubstanceDetailActivity extends BaseActivity {
 
     public void getIntentData() {
         SubstanceInfo substanceInfo = (SubstanceInfo) getIntent().getSerializableExtra(Constant.sysConfig.TAKE_DATA_KEY);
+        tvTitle.setText(substanceInfo.substanceName);
+
         String baseInfo = "<b>中文名:</b> " + substanceInfo.substanceName + "<br/>" +
                 "<b>中文别名:</b> " + substanceInfo.chAlias + "<br/>" +
                 "<b>英文名:</b> " + substanceInfo.enAlias + "<br/>" +

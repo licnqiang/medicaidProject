@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.activity.SelectReactionActivity">
 
     <include layout="@layout/common_title" />
@@ -18,21 +19,43 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tablayout"
-                style="@style/MyTablayoutstyle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/transparent" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/one_type"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_select_state"
+                    android:text="添加一种物质"
+                    android:textColor="@drawable/tab_select_color_state" />
+
+                <Button
+                    android:id="@+id/one_group"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_select_state"
+                    android:text="添加一组物质"
+                    android:textColor="@drawable/tab_select_color_state" />
+
+            </LinearLayout>
 
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="300dp" />
 
 
             <LinearLayout

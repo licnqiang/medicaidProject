@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.modeBean.SubstanceDetail;
+import cn.piesat.medicaid.ui.activity.HazardAssessmentActivity;
 import cn.piesat.medicaid.ui.activity.SelectReactionActivity;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
 
@@ -47,13 +48,14 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
         final SubstanceDetail substanceDetail = mInfolist.get(position);
         holder.itemTitle.setText(substanceDetail.titleName);
         holder.detailInfo.setText(Html.fromHtml(substanceDetail.Content.isEmpty() ? "暂无该信息" : substanceDetail.Content));
-
+        holder.itemIcon.setImageResource(substanceDetail.drawableRe);
         if (position % 2 == 0) {
             holder.itemLlBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
         } else {
             holder.itemLlBackgroud.setBackgroundResource(R.color.white);
 
         }
+
 
         holder.itemLlBackgroud.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,8 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
                     if (holder.lookState.isSelected()) {
                         holder.lookState.setSelected(false);
                         holder.itemDetail.setVisibility(View.GONE);
+                        holder.itemIcon.setVisibility(View.VISIBLE);
+                        holder.itemIcon.setImageResource(substanceDetail.drawableRe);
                         holder.itemTitle.setTextColor(Color.parseColor("#5B5B5B"));
                         if (position % 2 == 0) {
                             holder.itemLlBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
@@ -71,11 +75,14 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
                         }
 
                     } else {
+                        holder.itemIcon.setVisibility(View.INVISIBLE);
                         holder.itemTitle.setTextColor(Color.WHITE);
                         holder.itemDetail.setVisibility(View.VISIBLE);
                         holder.lookState.setSelected(true);
                         holder.itemLlBackgroud.setBackgroundResource(R.color.them_color);
                     }
+                } else if (position == 7) {
+                    context.startActivity(new Intent(context, HazardAssessmentActivity.class));
                 } else if (position == 8) {
                     context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra("substanceNum", substanceDetail.substanceNum));
                 }
@@ -99,6 +106,8 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.look_state)
         ImageView lookState;
+        @BindView(R.id.item_icon)
+        ImageView itemIcon;
         @BindView(R.id.item_title)
         TextView itemTitle;
         @BindView(R.id.detail_info)

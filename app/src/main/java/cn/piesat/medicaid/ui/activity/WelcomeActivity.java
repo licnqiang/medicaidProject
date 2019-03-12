@@ -11,15 +11,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.util.FileUtil;
+import cn.piesat.medicaid.util.ZipProgressUtil;
 
 /**
- *@author lq
- *@fileName
- *@data on  2019/2/27 14:05
- *@describe TODO
+ * @author lq
+ * @fileName
+ * @data on  2019/2/27 14:05
+ * @describe TODO
  */
 public class WelcomeActivity extends BaseActivity {
     String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -41,6 +47,33 @@ public class WelcomeActivity extends BaseActivity {
     protected void initData() {
         requestPer();
     }
+
+
+    private void UnZip() throws IOException {
+//        progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+        ZipProgressUtil.UnZipFile((FileInputStream) this.getResources().getAssets().open("map.zip"), FileUtil.getMapPath(), new ZipProgressUtil.ZipListener() {
+            @Override
+            public void zipSuccess() {
+                Log.e("--------","----zipSuccess------");
+            }
+
+            @Override
+            public void zipStart() {
+                Log.e("--------","----zipStart------");
+            }
+
+            @Override
+            public void zipProgress(int progress) {
+                Log.e("--------","----zipProgress------"+progress);
+            }
+
+            @Override
+            public void zipFail() {
+                Log.e("--------","----zipFail------");
+            }
+        });
+    }
+
 
     /**
      * 请求权限

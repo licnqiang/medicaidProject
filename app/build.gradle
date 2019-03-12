@@ -18,6 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -38,4 +43,5 @@ dependencies {
     implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
     implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
     implementation "com.wuxiaolong.pullloadmorerecyclerview:library:$rootProject.recyclerview_version"
+    implementation files('libs/Android_Map3D_SDK_V6.5.0_20180930.jar')
 }

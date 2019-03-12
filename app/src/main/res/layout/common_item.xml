@@ -8,7 +8,8 @@
     <LinearLayout
         android:id="@+id/item_ll_backgroud"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/look_state"
@@ -19,11 +20,20 @@
 
         <TextView
             android:id="@+id/item_title"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:text="基本信息" />
+
+
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            android:src="@mipmap/base" />
 
     </LinearLayout>
 
@@ -31,15 +41,22 @@
         android:id="@+id/item_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="15dp"
         android:visibility="gone">
 
         <TextView
             android:id="@+id/detail_info"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gry_box_10dp" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gry_box_10dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gry_tip_font" />
 
     </LinearLayout>
 

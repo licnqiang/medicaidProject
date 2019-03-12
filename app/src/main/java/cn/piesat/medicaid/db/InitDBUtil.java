@@ -2,12 +2,7 @@ package cn.piesat.medicaid.db;
 
 import android.content.Context;
 
-import com.raizlabs.android.dbflow.config.DatabaseConfig;
-import com.raizlabs.android.dbflow.config.DatabaseDefinition;
-import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.structure.database.DatabaseHelperListener;
-import com.raizlabs.android.dbflow.structure.database.OpenHelper;
 
 import java.io.File;
 

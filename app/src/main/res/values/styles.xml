@@ -18,13 +18,25 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="MyTablayoutstyle" parent="TextAppearance.Design.Tab">
-        <item name="tabBackground">@color/white</item>
-        <item name="tabIndicatorColor">@color/them_color</item>
-        <item name="tabIndicatorHeight">2dp</item>
-        <item name="tabSelectedTextColor">@color/them_color</item>
+    <!--<style name="MyTablayoutstyle" parent="TextAppearance.Design.Tab">-->
+        <!--<item name="tabBackground">@color/white</item>-->
+        <!--<item name="tabIndicatorColor">@color/them_color</item>-->
+        <!--<item name="tabIndicatorHeight">2dp</item>-->
+        <!--<item name="tabSelectedTextColor">@color/them_color</item>-->
+        <!--<item name="android:textSize">15sp</item>-->
+        <!--<item name="android:textColor">@color/them_black_font</item>-->
+    <!--</style>-->
+
+    <!--TabLayout字体样式-->
+    <style name="TabTextStyle" parent="TextAppearance.Design.Tab">
+        <!--Tab字体的大小-->
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/them_black_font</item>
+        <!--Tab字体的默认的颜色-->
+        <item name="android:textColor">@color/them_color</item>
+        <!--Tab字体是否为大写-->
+        <item name="textAllCaps">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="StyleProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">

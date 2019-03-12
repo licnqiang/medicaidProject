@@ -36,6 +36,8 @@ public class PKActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tvTitle.setText(R.string.substance_pk_title);
+
         pkList.setLayoutManager(new LinearLayoutManager(this));
         pkBeans = new ArrayList<>();
         pkAdapter = new PkAdapter(this, pkBeans);

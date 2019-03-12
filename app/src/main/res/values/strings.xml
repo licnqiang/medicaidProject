@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">medicaid</string>
+    <string name="app_name">病理手册</string>
     <string name="substance_pk">对比</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_substans_title">搜索已知物质</string>
+    <string name="substance_pk_title">物质对比</string>
 </resources>

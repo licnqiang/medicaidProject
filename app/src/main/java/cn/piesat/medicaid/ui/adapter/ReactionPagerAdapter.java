@@ -13,12 +13,10 @@ import java.util.List;
 
 public class ReactionPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] listTitle;
     private List<Fragment> listFragment;
 
-    public ReactionPagerAdapter(FragmentManager fm, String[] listTitle, List<Fragment> listFragment) {
+    public ReactionPagerAdapter(FragmentManager fm, List<Fragment> listFragment) {
         super(fm);
-        this.listTitle = listTitle;
         this.listFragment = listFragment;
     }
 
@@ -32,9 +30,4 @@ public class ReactionPagerAdapter extends FragmentPagerAdapter {
         return listFragment.size();
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return listTitle[position];
-    }
 }

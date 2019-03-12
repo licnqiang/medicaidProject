@@ -11,11 +11,18 @@ import java.util.UUID;
 
 import cn.piesat.medicaid.common.BaseApplication;
 
-
+/**
+ * @author lq
+ * @fileName FileUtil
+ * @data on  2019/3/12 16:18
+ * @describe TODO
+ */
 public class FileUtil {
+
     private static final String ROOT_PATH = "Android";
     private static String USER_NAME = "medicaid";
     private static final String DB_DISTORY = "db";
+    private static final String MAP_PATH = "/map";
     /* SDCard图片存储路径 */
     public static String sdCardImagePath = Environment.getExternalStorageDirectory().getPath()
             + File.separator + "image"
@@ -84,6 +91,16 @@ public class FileUtil {
             dbFileDirstory.mkdirs();
         }
         return sb.toString();
+    }
+
+    /**
+     * 获取离线地图path
+     *
+     * @return
+     */
+    public static String getMapPath() {
+
+        return getAppDataPath()+MAP_PATH;
     }
 
     /**
@@ -180,5 +197,4 @@ public class FileUtil {
         String path = sdCardImagePath + File.separator + "single" + File.separator;
         return path + strName;
     }
-
 }

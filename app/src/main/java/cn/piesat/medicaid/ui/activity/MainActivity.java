@@ -3,7 +3,10 @@ package cn.piesat.medicaid.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
@@ -17,6 +20,11 @@ import cn.piesat.medicaid.db.InitDBUtil;
  * @describe TODO
  */
 public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected int getLayoutId() {
@@ -33,6 +41,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        imgBack.setVisibility(View.GONE);
+        tvTitle.setText("病理手册");
 
     }
 
@@ -49,5 +59,12 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, ReactionResultActivity.class));
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
