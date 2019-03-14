@@ -34,7 +34,7 @@ public class HazardAssessmentActivity extends BaseActivity {
     }
 
     private void setMap() {
-        MapsInitializer.sdcardDir = FileUtil.getMapPath();
+//        MapsInitializer.sdcardDir = FileUtil.getMapPath();
         aMap = mapview.getMap();
         aMap.getUiSettings().setZoomControlsEnabled(false);
         aMap.getUiSettings().setMyLocationButtonEnabled(false);

@@ -49,6 +49,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_vertical"
+                        android:textStyle="bold"
                         android:text="搜索已知物质"
                         android:textSize="20sp"></TextView>
 
@@ -89,6 +90,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_vertical"
+                        android:textStyle="bold"
                         android:text="搜索未知物质"
                         android:textSize="20sp"></TextView>
                 </LinearLayout>
@@ -126,6 +128,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_vertical"
+                        android:textStyle="bold"
                         android:text="伤员分流"
                         android:textSize="20sp"></TextView>
 

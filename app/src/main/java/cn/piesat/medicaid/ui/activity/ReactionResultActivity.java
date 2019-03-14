@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
 
 /**
@@ -33,7 +34,7 @@ public class ReactionResultActivity extends BaseActivity {
     @BindView(R.id.detail_info)
     TextView detailInfo;
     @BindView(R.id.item_icon)
-    TextView itemIcon;
+    ImageView itemIcon;
     @BindView(R.id.item_detail)
     LinearLayout itemDetail;
     @BindView(R.id.look_state_1)
@@ -54,6 +55,7 @@ public class ReactionResultActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tvTitle.setText("化学反应结果");
         itemTitle.setTextColor(Color.WHITE);
         itemDetail.setVisibility(View.VISIBLE);
         lookState.setSelected(true);
@@ -71,7 +73,7 @@ public class ReactionResultActivity extends BaseActivity {
     }
 
     private void getIntentData() {
-        ChemicalReaction chemicalReaction = (ChemicalReaction) getIntent().getSerializableExtra("detail");
+        ChemicalReaction chemicalReaction = (ChemicalReaction) getIntent().getSerializableExtra(Constant.sysConfig.TAKE_DATA_KEY);
         if (null != chemicalReaction) {
             itemTitle.setText("反应结果");
             itemIcon.setVisibility(View.INVISIBLE);

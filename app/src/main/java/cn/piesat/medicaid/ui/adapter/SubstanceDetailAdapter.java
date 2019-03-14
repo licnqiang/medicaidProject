@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.piesat.medicaid.R;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.modeBean.SubstanceDetail;
 import cn.piesat.medicaid.ui.activity.HazardAssessmentActivity;
 import cn.piesat.medicaid.ui.activity.SelectReactionActivity;
@@ -84,7 +85,7 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
                 } else if (position == 7) {
                     context.startActivity(new Intent(context, HazardAssessmentActivity.class));
                 } else if (position == 8) {
-                    context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra("substanceNum", substanceDetail.substanceNum));
+                    context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra(Constant.SUBSTANCENUM, substanceDetail.substanceNum));
                 }
 
             }

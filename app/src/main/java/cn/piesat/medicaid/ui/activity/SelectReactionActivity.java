@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
+import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
 import cn.piesat.medicaid.tabmode.Reactant;
@@ -231,7 +232,7 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
             }
             ChemicalReaction chemicalReaction = (ChemicalReaction) o;
             if (null != chemicalReaction) {
-                startActivity(new Intent(SelectReactionActivity.this, ReactionResultActivity.class).putExtra("detail", chemicalReaction));
+                startActivity(new Intent(SelectReactionActivity.this, ReactionResultActivity.class).putExtra(Constant.sysConfig.TAKE_DATA_KEY, chemicalReaction));
             }
         }
 
@@ -242,7 +243,7 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     };
 
     public void getIntentData() {
-        mainReactantIDs = getIntent().getStringExtra("substanceNum");
+        mainReactantIDs = getIntent().getStringExtra(Constant.SUBSTANCENUM);
     }
 
 

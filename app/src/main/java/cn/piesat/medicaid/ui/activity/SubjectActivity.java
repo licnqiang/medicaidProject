@@ -26,6 +26,11 @@ import cn.piesat.medicaid.ui.adapter.RecordAdapter;
 import cn.piesat.medicaid.util.FileUtil;
 import cn.piesat.medicaid.util.ToastUtils;
 
+/**
+ * 分类算法
+ * 所有的答题操作都在这里执行
+ * 轮询题型，跳转结果界面
+ */
 public class SubjectActivity extends BaseActivity {
 
 
@@ -93,6 +98,9 @@ public class SubjectActivity extends BaseActivity {
         return getIntent().getStringExtra(Constant.COUNT_TYPE);
     }
 
+    /**
+     * 获取保存再res下的题型json,
+     */
     public void getSubjectData() {
         try {
             InputStream in = BaseApplication.getApplication().getAssets().open(
@@ -123,19 +131,20 @@ public class SubjectActivity extends BaseActivity {
 
     public void NextSubject(int type, String selcet) {
         /**
-         * 区分是成人算法还是儿童算法
+         * 当type==0 区分是成人算法还是儿童算法
+         * 其他根据id 关联显示下一题，
+         * 成人和儿童的整个树形题型结构，都是以id的形式关联
+         * 当关联的id=0,区分成人和儿童
+         * 当id>=100是答题结果
          */
         if (type == 0) {
             if (title.equals("成人分类算法")) {
-                //成人呼吸速率
+                //成人呼吸速率 3 为成人呼吸速率实体id
                 NextSubject(3, selcet);
             } else {
-                //儿童呼吸速率
+                //儿童呼吸速率 7 为儿童呼吸速率实体id
                 NextSubject(7, selcet);
             }
-//            record_list.add(subject.name + "----" + selcet);
-//            recordAdapter.notifyDataSetChanged();
-//            setData(subject);
         } else if (type < 100) {
             for (SubjectInfo subjectInfo : subjects) {
                 if (type == subjectInfo.id) {
