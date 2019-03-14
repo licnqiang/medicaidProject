@@ -91,11 +91,8 @@
                         android:gravity="center_vertical"
                         android:text="搜索未知物质"
                         android:textSize="20sp"></TextView>
-
                 </LinearLayout>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/tv_wounded_stream"
@@ -134,6 +131,9 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -33,6 +33,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="16sp"
                     android:layout_weight="1"
                     android:background="@drawable/tab_select_state"
                     android:text="添加一种物质"
@@ -44,6 +45,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="16sp"
                     android:layout_weight="1"
                     android:background="@drawable/tab_select_state"
                     android:text="添加一组物质"
@@ -68,6 +70,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:text="反应条件：" />
 
                 <android.support.v7.widget.RecyclerView
@@ -87,6 +90,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
+                android:textSize="16sp"
                 android:background="@drawable/green_box_10dp"
                 android:text="反应结果"
                 android:textColor="@color/white" />

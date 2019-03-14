@@ -32,6 +32,8 @@ public class ReactionResultActivity extends BaseActivity {
     LinearLayout itemLlBackgroud;
     @BindView(R.id.detail_info)
     TextView detailInfo;
+    @BindView(R.id.item_icon)
+    TextView itemIcon;
     @BindView(R.id.item_detail)
     LinearLayout itemDetail;
     @BindView(R.id.look_state_1)
@@ -72,6 +74,7 @@ public class ReactionResultActivity extends BaseActivity {
         ChemicalReaction chemicalReaction = (ChemicalReaction) getIntent().getSerializableExtra("detail");
         if (null != chemicalReaction) {
             itemTitle.setText("反应结果");
+            itemIcon.setVisibility(View.INVISIBLE);
             detailInfo.setText(chemicalReaction.reactionResult);
             itemTitle_1.setText("反应生成物");
             detailInfo_1.setText(chemicalReaction.reactionProduct);

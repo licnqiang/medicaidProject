@@ -82,8 +82,8 @@ public class AttrFragment extends BaseFragment implements OnItemClickListener, O
     }
 
     private void initRecyclerView() {
-        oneKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 5));
-        twoKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        oneKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 6));
+        twoKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 5));
     }
 
     @Override

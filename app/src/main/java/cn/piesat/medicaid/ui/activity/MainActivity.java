@@ -56,15 +56,8 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, SearchUnkwonActivity.class));
                 break;
             case R.id.tv_wounded_stream:
-                startActivity(new Intent(MainActivity.this, ReactionResultActivity.class));
+                startActivity(new Intent(MainActivity.this, WoundMenuActivity.class));
                 break;
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -26,6 +26,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:textSize="16sp"
             android:background="@drawable/tab_select_state"
             android:text="属性"
             android:textColor="@drawable/tab_select_color_state" />
@@ -36,6 +37,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textSize="16sp"
             android:layout_weight="1"
             android:background="@drawable/tab_select_state"
             android:text="症状"
@@ -46,7 +48,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="350dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
