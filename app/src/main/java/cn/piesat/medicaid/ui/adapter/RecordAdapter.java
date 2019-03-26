@@ -37,7 +37,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.itemTitle.setText(mInfolist.get(position));
+        holder.itemTitle.setText((position+1)+"."+mInfolist.get(position));
 
     }
 

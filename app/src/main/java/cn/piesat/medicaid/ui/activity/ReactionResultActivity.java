@@ -25,24 +25,14 @@ public class ReactionResultActivity extends BaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.look_state)
-    ImageView lookState;
     @BindView(R.id.item_title)
     TextView itemTitle;
-    @BindView(R.id.item_ll_backgroud)
-    LinearLayout itemLlBackgroud;
     @BindView(R.id.detail_info)
     TextView detailInfo;
-    @BindView(R.id.item_icon)
-    ImageView itemIcon;
     @BindView(R.id.item_detail)
     LinearLayout itemDetail;
-    @BindView(R.id.look_state_1)
-    ImageView lookState_1;
     @BindView(R.id.item_title_1)
     TextView itemTitle_1;
-    @BindView(R.id.item_ll_backgroud_1)
-    LinearLayout itemLlBackgroud_1;
     @BindView(R.id.detail_info_1)
     TextView detailInfo_1;
     @BindView(R.id.item_detail_1)
@@ -56,15 +46,6 @@ public class ReactionResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         tvTitle.setText("化学反应结果");
-        itemTitle.setTextColor(Color.WHITE);
-        itemDetail.setVisibility(View.VISIBLE);
-        lookState.setSelected(true);
-        itemLlBackgroud.setBackgroundResource(R.color.them_color);
-
-        itemTitle_1.setTextColor(Color.WHITE);
-        itemDetail_1.setVisibility(View.VISIBLE);
-        lookState_1.setSelected(true);
-        itemLlBackgroud_1.setBackgroundResource(R.color.them_color);
     }
 
     @Override
@@ -75,11 +56,18 @@ public class ReactionResultActivity extends BaseActivity {
     private void getIntentData() {
         ChemicalReaction chemicalReaction = (ChemicalReaction) getIntent().getSerializableExtra(Constant.sysConfig.TAKE_DATA_KEY);
         if (null != chemicalReaction) {
-            itemTitle.setText("反应结果");
-            itemIcon.setVisibility(View.INVISIBLE);
-            detailInfo.setText(chemicalReaction.reactionResult);
-            itemTitle_1.setText("反应生成物");
-            detailInfo_1.setText(chemicalReaction.reactionProduct);
+            itemTitle.setText("反应结果:");
+            if (null == chemicalReaction.reactionResult || chemicalReaction.reactionResult.isEmpty()) {
+                detailInfo.setText("无反应结果");
+            } else {
+                detailInfo.setText(chemicalReaction.reactionResult);
+            }
+            itemTitle_1.setText("反应生成物:");
+            if (null == chemicalReaction.reactionProduct || chemicalReaction.reactionProduct.isEmpty()) {
+                detailInfo_1.setText("无生成物");
+            } else {
+                detailInfo_1.setText(chemicalReaction.reactionProduct);
+            }
         }
     }
 

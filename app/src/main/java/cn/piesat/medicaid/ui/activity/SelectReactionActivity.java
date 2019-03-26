@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import cn.piesat.medicaid.R;
 import cn.piesat.medicaid.common.BaseActivity;
 import cn.piesat.medicaid.common.Constant;
 import cn.piesat.medicaid.controller.Controller;
+import cn.piesat.medicaid.modeBean.SubstanceDetail;
 import cn.piesat.medicaid.tabmode.ChemicalReaction;
 import cn.piesat.medicaid.tabmode.Reactant;
 import cn.piesat.medicaid.tabmode.ReactionCondition;
@@ -76,7 +80,6 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
 
     @Override
     protected void initView() {
-        tvTitle.setText("添加化学物质");
         getIntentData();
         init();
         oneType.setSelected(true);
@@ -243,7 +246,9 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     };
 
     public void getIntentData() {
-        mainReactantIDs = getIntent().getStringExtra(Constant.SUBSTANCENUM);
+        SubstanceDetail substanceDetail= (SubstanceDetail)getIntent().getSerializableExtra(Constant.SUBSTANCENUM);
+        mainReactantIDs=substanceDetail.substanceNum;
+        tvTitle.setText(substanceDetail.substanceName+"添加化学物质");
     }
 
 

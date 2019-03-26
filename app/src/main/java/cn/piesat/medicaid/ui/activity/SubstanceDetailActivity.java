@@ -90,6 +90,7 @@ public class SubstanceDetailActivity extends BaseActivity {
                 , substanceInfo.clinicalManifestation, substanceInfo.protectiveAction, substanceInfo.emergencyTreatment,"",""};
 
         for (int i = 0; i < substanceDetails.size(); i++) {
+            substanceDetails.get(i).substanceName=substanceInfo.substanceName;
             substanceDetails.get(i).Content = Detail[i];
             substanceDetails.get(i).substanceNum =substanceInfo.substanceNum;
         }

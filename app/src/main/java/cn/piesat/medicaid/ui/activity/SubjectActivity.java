@@ -117,15 +117,12 @@ public class SubjectActivity extends BaseActivity {
     public void setData(SubjectInfo subjectInfo) {
         if (null == subjectInfo) {
             subject = subjects.get(0);
-            subjectName.setText(subject.name);
-            oneSelect.setText(subject.one);
-            twoSelect.setText(subject.two);
         } else {
             subject = subjectInfo;
-            subjectName.setText(subjectInfo.name);
-            oneSelect.setText(subjectInfo.one);
-            twoSelect.setText(subjectInfo.two);
         }
+        subjectName.setText((record_list.size() + 1) + "." + subject.name);
+        oneSelect.setText(subject.one);
+        twoSelect.setText(subject.two);
         saveSubject.add(subjectInfo);
     }
 

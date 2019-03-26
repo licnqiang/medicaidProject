@@ -85,7 +85,7 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
                 } else if (position == 7) {
                     context.startActivity(new Intent(context, HazardAssessmentActivity.class));
                 } else if (position == 8) {
-                    context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra(Constant.SUBSTANCENUM, substanceDetail.substanceNum));
+                    context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra(Constant.SUBSTANCENUM, substanceDetail));
                 }
 
             }

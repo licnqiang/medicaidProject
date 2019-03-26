@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.activity.ReactionResultActivity">
 
     <include layout="@layout/common_title" />
@@ -16,47 +16,62 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <LinearLayout
-            android:id="@+id/item_ll_backgroud_1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
 
-            <ImageView
-                android:id="@+id/look_state_1"
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/item_check_rrow" />
+        <LinearLayout
+            android:id="@+id/item_detail_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
 
             <TextView
                 android:id="@+id/item_title_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:paddingLeft="20dp"
-                android:text="基本信息" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/item_detail_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:visibility="gone">
+                android:text="基本信息"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/detail_info_1"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/gry_box_10dp"
-                android:textSize="16sp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <include layout="@layout/common_item" />
+        <LinearLayout
+            android:id="@+id/item_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="基本信息"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/detail_info"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/gry_box_10dp"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
