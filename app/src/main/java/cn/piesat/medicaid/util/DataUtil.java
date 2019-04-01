@@ -29,4 +29,24 @@ public class DataUtil {
         numberFormat.setMaximumFractionDigits(2);
         return numberFormat.format(data);
     }
+
+    /**
+     * 分割$ 符号，标记顺序
+     *
+     * @param data
+     * @return
+     */
+    public static String filterData(String data) {
+        String newData = "";
+        if (data.contains("!$")) {
+            String[] strs = data.split("!");
+            for (int i = 0, len = strs.length; i < len; i++) {
+                String filterStr=strs[i].replace("$","");
+                newData = newData +"<b>"+ (i+1) + ".</b>" + filterStr + "<br/>";
+            }
+        } else {
+            newData = data+"<br/>";
+        }
+        return newData;
+    }
 }

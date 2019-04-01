@@ -2,6 +2,7 @@ package cn.piesat.medicaid.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class TwoAttriAndTypeAdapter extends RecyclerView.Adapter<TwoAttriAndType
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Attrs attrs = mInfolist.get(position);
-        holder.itemName.setText(attrs.comment);
+        holder.itemName.setText(Html.fromHtml(attrs.comment));
         if (context.searchKeyWords.contains(attrs)) {
             holder.checkbox.setChecked(true);
         } else {

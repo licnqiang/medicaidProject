@@ -2,6 +2,7 @@ package cn.piesat.medicaid.parser;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;

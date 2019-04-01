@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ import cn.piesat.medicaid.modeBean.SubstanceDetail;
 import cn.piesat.medicaid.ui.activity.HazardAssessmentActivity;
 import cn.piesat.medicaid.ui.activity.SelectReactionActivity;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
+import cn.piesat.medicaid.util.DataUtil;
 
 /**
  * 药物详情
@@ -48,7 +52,7 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final SubstanceDetail substanceDetail = mInfolist.get(position);
         holder.itemTitle.setText(substanceDetail.titleName);
-        holder.detailInfo.setText(Html.fromHtml(substanceDetail.Content.isEmpty() ? "暂无该信息" : substanceDetail.Content));
+        holder.detailInfo.setText(Html.fromHtml(substanceDetail.Content.isEmpty() ? "暂无该信息" : DataUtil.filterData(substanceDetail.Content)));
         holder.itemIcon.setImageResource(substanceDetail.drawableRe);
         if (position % 2 == 0) {
             holder.itemLlBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
@@ -124,4 +128,5 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
         }
 
     }
+
 }

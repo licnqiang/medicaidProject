@@ -79,7 +79,17 @@ public class SubjectActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
-                finish();
+                if (saveSubject.size() > 1) {
+                    saveSubject.remove(saveSubject.size() - 1);
+                    record_list.remove(record_list.size() - 1);
+                    recordAdapter.notifyDataSetChanged();
+                    SubjectInfo subjectNext = saveSubject.get(saveSubject.size() - 1);
+                    saveSubject.remove(saveSubject.size() - 1);
+                    setData(subjectNext);
+
+                } else {
+                    finish();
+                }
                 break;
             case R.id.one_select:
                 NextSubject(subject.one_type, oneSelect.getText().toString());
@@ -151,7 +161,6 @@ public class SubjectActivity extends BaseActivity {
                 }
             }
         } else {
-            clearData();
             startActivity(new Intent(this, ResultActivity.class).putExtra(Constant.RESULT_TYPE, type)
                     .putExtra(Constant.COUNT_TYPE, title));
         }
@@ -165,6 +174,12 @@ public class SubjectActivity extends BaseActivity {
         recordAdapter.notifyDataSetChanged();
         saveSubject.clear();
         setData(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clearData();
     }
 }
 

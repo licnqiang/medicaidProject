@@ -106,6 +106,7 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
         pagerAdapter = new ReactionPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setOnPageChangeListener(this);
         viewPager.setAdapter(pagerAdapter);
+        Controller.GetReactionConditionList(callback);
     }
 
     /**
@@ -204,7 +205,6 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     @Override
     protected void onResume() {
         super.onResume();
-        Controller.GetReactionConditionList(callback);
     }
 
     Controller.GetResultListenerCallback callback = new Controller.GetResultListenerCallback() {
@@ -246,9 +246,9 @@ public class SelectReactionActivity extends BaseActivity implements OnItemCheckC
     };
 
     public void getIntentData() {
-        SubstanceDetail substanceDetail= (SubstanceDetail)getIntent().getSerializableExtra(Constant.SUBSTANCENUM);
-        mainReactantIDs=substanceDetail.substanceNum;
-        tvTitle.setText(substanceDetail.substanceName+"添加化学物质");
+        SubstanceDetail substanceDetail = (SubstanceDetail) getIntent().getSerializableExtra(Constant.SUBSTANCENUM);
+        mainReactantIDs = substanceDetail.substanceNum;
+        tvTitle.setText(substanceDetail.substanceName + "添加化学物质");
     }
 
 

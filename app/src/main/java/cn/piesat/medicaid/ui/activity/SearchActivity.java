@@ -25,6 +25,7 @@ import cn.piesat.medicaid.tabmode.SubstanceInfo;
 import cn.piesat.medicaid.ui.adapter.SearchAdapter;
 import cn.piesat.medicaid.ui.view.OnItemCheckClickListener;
 import cn.piesat.medicaid.ui.view.OnItemClickListener;
+import cn.piesat.medicaid.util.DataUtil;
 import cn.piesat.medicaid.util.ToastUtils;
 
 /**
@@ -254,29 +255,29 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         ;
 
         PkBean pkBean1 = new PkBean();
-        pkBean1.itemName1 = "<b>外观与性状:</b>" + selectSubstance.get(0).appearanceAndCharacter;
-        pkBean1.itemName2 = "<b>外观与性状:</b>" + selectSubstance.get(1).appearanceAndCharacter;
+        pkBean1.itemName1 = "<b>外观与性状:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).appearanceAndCharacter);
+        pkBean1.itemName2 = "<b>外观与性状:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).appearanceAndCharacter);
 
         PkBean pkBean2 = new PkBean();
-        pkBean2.itemName1 = "<b>危害特性:</b>" + selectSubstance.get(0).hazardProperty;
-        pkBean2.itemName2 = "<b>危害特性:</b>" + selectSubstance.get(1).hazardProperty;
+        pkBean2.itemName1 = "<b>危害特性:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).hazardProperty);
+        pkBean2.itemName2 = "<b>危害特性:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).hazardProperty);
 
 
         PkBean pkBean3 = new PkBean();
-        pkBean3.itemName1 = "<b>毒理学信息:</b>" + selectSubstance.get(0).toxicologyInfo;
-        pkBean3.itemName2 = "<b>毒理学信息:</b>" + selectSubstance.get(1).toxicologyInfo;
+        pkBean3.itemName1 = "<b>毒理学信息:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).toxicologyInfo);
+        pkBean3.itemName2 = "<b>毒理学信息:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).toxicologyInfo);
 
         PkBean pkBean4 = new PkBean();
-        pkBean4.itemName1 = "<b>临床表现:</b>" + selectSubstance.get(0).clinicalManifestation;
-        pkBean4.itemName2 = "<b>临床表现:</b>" + selectSubstance.get(1).clinicalManifestation;
+        pkBean4.itemName1 = "<b>临床表现:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).clinicalManifestation);
+        pkBean4.itemName2 = "<b>临床表现:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).clinicalManifestation);
 
         PkBean pkBean5 = new PkBean();
-        pkBean5.itemName1 = "<b>保护措施:</b>" + selectSubstance.get(0).protectiveAction;
-        pkBean5.itemName2 = "<b>保护措施:</b>" + selectSubstance.get(1).protectiveAction;
+        pkBean5.itemName1 = "<b>保护措施:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).protectiveAction);
+        pkBean5.itemName2 = "<b>保护措施:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).protectiveAction);
 
         PkBean pkBean6 = new PkBean();
-        pkBean6.itemName1 = "<b>急救措施:</b>" + selectSubstance.get(0).emergencyTreatment;
-        pkBean6.itemName2 = "<b>急救措施:</b>" + selectSubstance.get(1).emergencyTreatment;
+        pkBean6.itemName1 = "<b>急救措施:</b><br/>" + DataUtil.filterData(selectSubstance.get(0).emergencyTreatment);
+        pkBean6.itemName2 = "<b>急救措施:</b><br/>" + DataUtil.filterData(selectSubstance.get(1).emergencyTreatment);
 
         pkBeans.add(pkBean);
         pkBeans.add(pkBean1);
