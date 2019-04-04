@@ -80,7 +80,7 @@ public class SymptomFragment extends BaseFragment implements OnItemClickListener
     }
 
     private void initRecyclerView() {
-        oneKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        oneKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 6));
         twoKeyWordRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
     }
 

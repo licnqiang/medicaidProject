@@ -60,38 +60,36 @@ public class SubstanceDetailAdapter extends RecyclerView.Adapter<SubstanceDetail
             holder.itemLlBackgroud.setBackgroundResource(R.color.white);
 
         }
+        holder.lookState.setSelected(substanceDetail.state);
+        if (substanceDetail.state) {
+            holder.itemIcon.setVisibility(View.INVISIBLE);
+            holder.itemTitle.setTextColor(Color.WHITE);
+            holder.itemDetail.setVisibility(View.VISIBLE);
+            holder.itemLlBackgroud.setBackgroundResource(R.color.them_color);
+        } else {
+            holder.itemDetail.setVisibility(View.GONE);
+            holder.itemIcon.setVisibility(View.VISIBLE);
+            holder.itemIcon.setImageResource(substanceDetail.drawableRe);
+            holder.itemTitle.setTextColor(Color.parseColor("#5B5B5B"));
+        }
 
 
         holder.itemLlBackgroud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (position != 7 && position != 8) {
-                    if (holder.lookState.isSelected()) {
-                        holder.lookState.setSelected(false);
-                        holder.itemDetail.setVisibility(View.GONE);
-                        holder.itemIcon.setVisibility(View.VISIBLE);
-                        holder.itemIcon.setImageResource(substanceDetail.drawableRe);
-                        holder.itemTitle.setTextColor(Color.parseColor("#5B5B5B"));
-                        if (position % 2 == 0) {
-                            holder.itemLlBackgroud.setBackgroundResource(R.color.them_color_F5F8FD);
-                        } else {
-                            holder.itemLlBackgroud.setBackgroundResource(R.color.white);
-
-                        }
-
+                    if (substanceDetail.state) {
+                        substanceDetail.state = false;
                     } else {
-                        holder.itemIcon.setVisibility(View.INVISIBLE);
-                        holder.itemTitle.setTextColor(Color.WHITE);
-                        holder.itemDetail.setVisibility(View.VISIBLE);
-                        holder.lookState.setSelected(true);
-                        holder.itemLlBackgroud.setBackgroundResource(R.color.them_color);
+                        substanceDetail.state = true;
                     }
+
                 } else if (position == 7) {
                     context.startActivity(new Intent(context, HazardAssessmentActivity.class));
                 } else if (position == 8) {
                     context.startActivity(new Intent(context, SelectReactionActivity.class).putExtra(Constant.SUBSTANCENUM, substanceDetail));
                 }
-
+                notifyDataSetChanged();
             }
         });
 

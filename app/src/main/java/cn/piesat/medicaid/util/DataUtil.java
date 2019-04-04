@@ -37,7 +37,7 @@ public class DataUtil {
      * @return
      */
     public static String filterData(String data) {
-        String newData = "";
+        String newData = " ";
         if (data.contains("!$")) {
             String[] strs = data.split("!");
             for (int i = 0, len = strs.length; i < len; i++) {
